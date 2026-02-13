@@ -73,7 +73,7 @@ This project can be deployed easily using:
 
 ## 👨‍💻 Author
 
-Developed by [Your Name]
+Developed by [Soumith Poosaala]
 
 ---
 
