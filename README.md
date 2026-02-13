@@ -6,6 +6,11 @@ Built using pure HTML, CSS, and JavaScript — no frameworks.
 
 ---
 
+## 🚀 Live Demo
+
+( https://poosaalasoumith.github.io/Split-Bill-App/ )
+
+---
 
 ## ✨ Features
 
