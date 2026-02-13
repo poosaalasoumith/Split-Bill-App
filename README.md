@@ -6,12 +6,6 @@ Built using pure HTML, CSS, and JavaScript — no frameworks.
 
 ---
 
-## 🚀 Live Demo
-
-(After enabling GitHub Pages, paste your live link here)
-
-
----
 
 ## ✨ Features
 
