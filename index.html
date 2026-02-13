@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Split Bills</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <section class="hero">
+      <div class="badge">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="6" y1="3" x2="6" y2="15"></line>
+          <circle cx="18" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <path d="M18 9a9 9 0 0 1-9 9"></path>
+        </svg>
+        Powered by Dijkstra's Algorithm
+      </div>
+
+      <h1 class="title-primary">Split Bills</h1>
+      <h2 class="title-secondary">Intelligently</h2>
+
+      <p class="subtitle">
+        Minimize transactions using graph-based optimization. Our algorithm
+        reduces settlement complexity by up to 60%.
+      </p>
+    </section>
+
+    <div class="dashboard-wrapper">
+      <section class="dashboard">
+        <div class="dashboard-card">
+          <div class="card-header reduction-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span class="card-label">Participants</span>
+          </div>
+          <div class="card-value">
+            <span id="dashboardParticipantCount">0/20</span>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header reduction-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-currency-rupee"
+              viewBox="0 0 8 16"
+            >
+              <path
+                d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"
+              />
+            </svg>
+            <span class="card-label">Total Spent</span>
+          </div>
+          <div class="card-value">
+            <span id="totalSpentValue">₹0.00</span>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header reduction-icon">
+            <span class="icon">⇄</span>
+            <span class="card-label">Settlements</span>
+          </div>
+          <div class="card-value">2</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <svg
+              class="reduction-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline>
+              <polyline points="16 17 22 17 22 11"></polyline>
+            </svg>
+
+            <span class="card-label">Reduction</span>
+          </div>
+          <div class="card-value">0%</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="dashboard-main">
+      <!-- LEFT COLUMN -->
+      <div class="left-column">
+        <!-- PARTICIPANTS -->
+        <section class="participants-section glass-card settlements-car">
+          <!-- HEADER -->
+          <div class="section-header">
+            <h3>Participants</h3>
+            <button class="clear-btn" id="clearParticipants">Clear All</button>
+          </div>
+
+          <!-- ADD INPUT -->
+          <div class="glass-input">
+            <input
+              type="text"
+              id="participantInput"
+              placeholder="Add participant..."
+            />
+
+            <button class="icon-btn" id="addParticipantBtn">👤+</button>
+          </div>
+
+          <!-- COUNT -->
+          <p class="muted-text" id="participantSectionCount">
+            0/20 participants
+          </p>
+
+          <!-- LIST -->
+          <div class="participant-list" id="participantList">
+            <!-- Participants will be injected here by JavaScript -->
+          </div>
+        </section>
+
+        <!-- EXPENSES -->
+        <section class="expenses-section">
+          <div class="section-header">
+            <h3 class="section-title">Expenses</h3>
+          </div>
+
+          <div class="glass-card">
+            <h4 class="card-title">
+              <i class="fa-solid fa-plus"></i> Add Expense
+            </h4>
+
+            <div class="form-grid">
+              <input type="text" id="expenseDesc" placeholder="Description" />
+              <input
+                type="number"
+                id="expenseAmount"
+                placeholder="Amount (₹)"
+              />
+              <select id="paidBy" class="glass-select" required>
+                <option value="" disabled selected>Paid by</option>
+              </select>
+
+              <!-- SPLIT AMONG (CUSTOM DROPDOWN) -->
+              <div class="split-dropdown">
+                <div class="split-input" id="splitInput">
+                  <span id="splitPlaceholder">Split among</span>
+                </div>
+
+                <div class="split-menu" id="splitMenu">
+                  <div class="split-option select-all">
+                    <input type="checkbox" id="splitAll" />
+                    <label for="splitAll">Select All</label>
+                  </div>
+
+                  <div id="splitOptions"></div>
+                </div>
+              </div>
+            </div>
+
+            <button class="primary-btn" id="addExpenseBtn">Add Expense</button>
+          </div>
+        </section>
+
+        <!-- RECENT EXPENSES -->
+        <section class="recent-section">
+          <div class="section-header">
+            <h3 class="section-title">Recent Expenses</h3>
+          </div>
+
+          <div class="glass-card compact" id="recentExpenses">
+            <p class="muted-text">No expenses yet</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-column">
+        <!-- SMART SETTLEMENTS -->
+        <section class="smart-settlements-section">
+          <div class="section-header">
+            <h3 class="section-title">Smart Settlements</h3>
+          </div>
+          
+
+          <div class="glass-card settlements-card">
+            <div class="settlement-header">
+              <span class="sparkle-icon">✦</span>
+              <span>Optimized Settlements</span>
+              
+            </div>
+
+            <p class="muted-text">
+              Dijkstra's algorithm reduced 2 potential transactions to just 2
+            </p>
+
+            <div class="settlement-list" id="settlementList">
+              <div class="settlement-row">
+              </div>
+            </div>
+          </div>
+        </section>
+        
+
+        <!-- HOW IT WORKS -->
+        <section class="how-it-works">
+          <div class="glass-card settlements-card">
+            <div class="section-header">
+              <h3 class="section-title">How it works</h3>
+            </div>
+
+            <p>
+              Traditional splitting would require <span class="red">2</span>
+              transactions. Our Dijkstra-inspired algorithm models debts as a
+              graph and finds the minimum spanning path, reducing this to just
+              <span class="green">2</span> settlements.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
